@@ -2,14 +2,10 @@ provider "azurerm" {
   features {}
 }
 
-terraform {
-  backend "azurerm" {}
+provider "azuread" {
+  tenant_id = var.tenant_id
 }
 
-resource "azurerm_resource_group" "tf-sandbox" {
-  name     = var.resource_group_name
-  location = var.location
-  tags = {
-    environment = "tf-sandbox"
-  }
+terraform {
+  backend "azurerm" {}
 }
