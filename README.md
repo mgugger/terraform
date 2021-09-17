@@ -4,7 +4,7 @@
 ```
 az login
 
-az group create --name terraform --location north-europe
+az group create --name terraform --location northeurope
 
 az storage account create --name terraformbucket \
   --resource-group terraform \
@@ -20,7 +20,7 @@ az ad signed-in-user show --query objectId -o tsv | az role assignment create \
 az storage container create \
     --account-name terraformbucket \
     --resource-group terraform \
-    --name tfstate \
+    --name tfstate
 ```
 
 # Plan & Apply

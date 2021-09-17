@@ -38,6 +38,14 @@ resource "azurerm_resource_group" "tf-arc-kubernetes" {
   }
 }
 
+resource "azurerm_log_analytics_workspace" "tf-arc-kubernetes" {
+  name                = "acctest-01"
+  location            = var.location
+  resource_group_name = format("%s%s",var.arc_resource_group_name,"-kubernetes")
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
 data "azuread_client_config" "current" {}
 
 resource "azuread_application" "tf-arc" {
@@ -54,15 +62,25 @@ resource "azuread_service_principal" "arc-onboarding" {
 }
 
 resource "azurerm_role_assignment" "sp-arc-linux-k8s" {
-  scope              = azurerm_resource_group.tf-arc-linux.id
-  #role_definition_id = "34e09817-6cbe-4d01-b1a2-e0eac5743d41" # Kubernetes Cluster - Azure Arc Onboarding
+  scope              = azurerm_resource_group.tf-arc-kubernetes.id
   role_definition_name = "Kubernetes Cluster - Azure Arc Onboarding"
+  principal_id       = azuread_service_principal.arc-onboarding.object_id
+}
+
+resource "azurerm_role_assignment" "sp-arc-linux-k8s-contributor" {
+  scope              = azurerm_resource_group.tf-arc-kubernetes.id
+  role_definition_name = "Contributor"
+  principal_id       = azuread_service_principal.arc-onboarding.object_id
+}
+
+resource "azurerm_role_assignment" "sp-arc-linux-k8s-metrics" {
+  scope              = azurerm_resource_group.tf-arc-kubernetes.id
+  role_definition_name = "Monitoring Metrics Publisher"
   principal_id       = azuread_service_principal.arc-onboarding.object_id
 }
 
 resource "azurerm_role_assignment" "sp-arc-linux-srv" {
   scope              = azurerm_resource_group.tf-arc-linux.id
-  #role_definition_id = "b64e21ea-ac4e-4cdf-9dc9-5b892992bee7" # Azure Connected Machine Onboarding
   role_definition_name = "Azure Connected Machine Onboarding"
   principal_id       = azuread_service_principal.arc-onboarding.object_id
 }
@@ -80,5 +98,17 @@ output "arc-sp-id" {
 output "arc-sp-secret" {
   description = "Azure Arc Onboarding Service Principal Secret"
   value       = azuread_service_principal_password.tf-arc.value
+  sensitive   = true
+}
+
+output "arc-loganalytics-workspace-id" {
+  description = "Log Analytics Workspace for kubernetes arc"
+  value       = azurerm_log_analytics_workspace.tf-arc-kubernetes.workspace_id
+  sensitive   = false
+}
+
+output "arc-loganalytics-workspace-shared-key" {
+  description = "Log Analytics Workspace Shared Key for kubernetes arc"
+  value       = azurerm_log_analytics_workspace.tf-arc-kubernetes.primary_shared_key
   sensitive   = true
 }
