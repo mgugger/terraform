@@ -4,8 +4,8 @@
 ```
 az login
 LOCATION=switzerlandnorth
-STORAGE_ACCOUNT_NAME=mdghometf
-SUBSCRIPTION=9cd44e3c-5f40-4eea-95f7-bb551bac9cdd
+STORAGE_ACCOUNT_NAME=<your storage account name>
+SUBSCRIPTION=<your subscription id>
 
 az group create --name terraform --location $LOCATION
 
