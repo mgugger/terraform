@@ -13,6 +13,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_prefix          = "aks-main"
     automatic_channel_upgrade = "rapid"
     private_cluster_enabled = true
+    private_cluster_public_fqdn_enabled = true
     private_dns_zone_id = "System"
     sku_tier = "Free"
 

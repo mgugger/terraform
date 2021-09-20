@@ -17,7 +17,7 @@ resource "azurerm_public_ip" "pip-wireguard" {
   resource_group_name = azurerm_resource_group.tf-connectivity.name
   location            = azurerm_resource_group.tf-connectivity.location
   allocation_method   = "Dynamic"
-  domain_name_label = "mdgwgsandbox"
+  domain_name_label = "mdgwork"
 
   tags = {
     environment = "sandbox"
