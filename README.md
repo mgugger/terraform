@@ -3,7 +3,7 @@
 # Create the required storage account
 ```
 az login
-LOCATION=switzerlandnorth
+LOCATION=<azure location>
 STORAGE_ACCOUNT_NAME=<your storage account name>
 SUBSCRIPTION=<your subscription id>
 
