@@ -54,6 +54,7 @@ resource "azurerm_linux_virtual_machine" "vm-wireguard" {
   }
 
   tags = {
+    environment = "work"
     zone = "dmz"
     applicationRole = "wireguard"
   }

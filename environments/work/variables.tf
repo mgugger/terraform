@@ -21,3 +21,7 @@ variable vm_username {
 variable tenant_id {
     description = "Azure Tenant Id"
 }
+
+variable aks_resource_group_name {
+    description = "AKS Group Name"
+}

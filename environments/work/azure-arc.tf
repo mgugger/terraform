@@ -26,7 +26,7 @@ resource "azurerm_resource_group" "tf-arc-windows" {
   name     = format("%s%s",var.arc_resource_group_name,"-windows")
   location = var.location
   tags = {
-    environment = "tf-arc-windows"
+    environment = "work"
   }
 }
 
@@ -34,7 +34,7 @@ resource "azurerm_resource_group" "tf-arc-kubernetes" {
   name     = format("%s%s",var.arc_resource_group_name,"-kubernetes")
   location = var.location
   tags = {
-    environment = "tf-arc-kubernetes"
+    environment = "work"
   }
 }
 
@@ -45,8 +45,6 @@ resource "azurerm_log_analytics_workspace" "tf-arc-kubernetes" {
   sku                 = "PerGB2018"
   retention_in_days   = 30
 }
-
-data "azuread_client_config" "current" {}
 
 resource "azuread_application" "tf-arc" {
   display_name = "tf-arc"

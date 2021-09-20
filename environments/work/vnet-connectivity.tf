@@ -2,7 +2,7 @@ resource "azurerm_resource_group" "tf-connectivity" {
   name     = var.connectivity_resource_group_name
   location = var.location
   tags = {
-    environment = "tf-connectivity"
+    environment = "work"
   }
 }
 
@@ -14,7 +14,7 @@ resource "azurerm_virtual_network" "sandbox" {
   #dns_servers         = ["10.0.235.29", "10.0.235.30"]
 
   tags = {
-    environment = "tf-connectivity"
+    environment = "work"
   }
 }
 
@@ -32,9 +32,18 @@ resource "azurerm_subnet" "internal" {
   address_prefixes = ["10.0.235.32/27"]
 }
 
-## Free Ranges
-# "10.0.0.64/27"
-# "10.0.0.96/27"
-# "10.0.0.128/27"
-# "10.0.0.160/27"
-# "10.0.0.192/27"
+resource "azurerm_subnet" "aks" {
+  name                 = "aks"
+  virtual_network_name = azurerm_virtual_network.sandbox.name
+  resource_group_name  = azurerm_resource_group.tf-connectivity.name
+  address_prefixes = ["10.0.235.64/27"]
+}
+
+## Free Ranges in 10.0.235.0/24
+# "10.0.235.64/27"
+# "10.0.235.96/27"
+# "10.0.235.128/27"
+# "10.0.235.160/27"
+# "10.0.235.192/27"
+
+## AKS

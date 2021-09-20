@@ -14,4 +14,5 @@ inputs = {
   storage_resource_group_name = "tf-storage"
   arc_resource_group_name = "tf-arc"
   k3s_resource_group_name = "tf-k3s"
+  aks_resource_group_name = "tf-aks"
 }

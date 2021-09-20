@@ -2,7 +2,7 @@ resource "azurerm_resource_group" "tf-k3s" {
   name     = var.k3s_resource_group_name
   location = var.location
   tags = {
-    environment = "tf-k3s"
+    environment = "work"
   }
 }
 
@@ -48,6 +48,7 @@ resource "azurerm_linux_virtual_machine" "vm-k3s-server1" {
   }
 
   tags = {
+    environment = "work"
     zone = "internal"
     applicationRole = "k3s"
   }
@@ -109,6 +110,7 @@ resource "azurerm_linux_virtual_machine" "vm-k3s-worker1" {
   }
 
   tags = {
+    environment = "work"
     zone = "internal"
     applicationRole = "k3s"
   }
