@@ -1,6 +1,24 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
+provider "registry.terraform.io/hashicorp/azuread" {
+  version = "2.3.0"
+  hashes = [
+    "h1:6AcGXvZr/3AVqeDKkOybm0SfbmSnDOamKbCA+XaM0FY=",
+    "zh:1d0fe41f2cb9de3509e95dad2c6142671b5244f269c6f7f58c1520d942d1b945",
+    "zh:2bfa2d78bdf941b97915342d8ece1c09ef66447d73301b15cb8a6aca64a21835",
+    "zh:674cb42cf3f8d8e3e63b54b0e939877ae82b2601812811e1d44c83270d6a729a",
+    "zh:8d4b8d22b3987546873e9bd13d3898a19890384509a965daee50fbb4c6f3c366",
+    "zh:8e08a4a2498ce2efcb06287adc124106667d6068f42d6e9023345e8f8d1c3437",
+    "zh:a33598c7af093a381a4a81d4060e2952c1d395de614bea84ab91916a3d7c9e46",
+    "zh:b095ea093de3102707c42135ede8dec492d5691f2bad464fb2afcda958468648",
+    "zh:c52d96e0854ea686b0d7662ebaabaaa44f59571c8b297ca19a8780aeab1dade7",
+    "zh:eb9f014d56ba3328004c48f405611a7565e5f2ce7a4c66db06735c1126f627ab",
+    "zh:ed10d29043ab54866f314e063cb4c639746900e4ddad74deda7ebd3a9cdc33c6",
+    "zh:f03f9ad3f83ac627b8846bbd2e33842ee6243c283ec9916cb5112d1a4169946e",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/azurerm" {
   version = "2.77.0"
   hashes = [

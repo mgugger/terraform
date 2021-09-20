@@ -27,6 +27,7 @@ resource "azurerm_public_ip" "pip-wireguard" {
 
 resource "azurerm_managed_disk" "wireguard-osdisk" {
   name = "vm-wireguard-osdisk"
+  os_type              = "Linux"
   location = var.location
   resource_group_name = azurerm_resource_group.tf-connectivity.name
   storage_account_type = "Premium_LRS"
