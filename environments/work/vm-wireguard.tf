@@ -57,6 +57,7 @@ resource "azurerm_linux_virtual_machine" "vm-wireguard" {
     environment = "work"
     zone = "dmz"
     applicationRole = "wireguard"
+    wireguard_ip = "192.168.8.0/32"
   }
 }
 

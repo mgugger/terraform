@@ -6,6 +6,14 @@ resource "azurerm_resource_group" "tf-aks" {
   }
 }
 
+resource "azurerm_log_analytics_workspace" "log-aks-main" {
+  name                = "log-aks-main"
+  location            = var.location
+  resource_group_name = var.aks_resource_group_name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
 resource "azurerm_kubernetes_cluster" "aks" {
     name                = "aks-main"
     location            = azurerm_resource_group.tf-aks.location
@@ -49,10 +57,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
         # ingress_application_gateway {
         #     enabled = true
         # }
-        # oms_agent {
-        # enabled                    = true
-        # log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
-        # }
+        oms_agent {
+            enabled                    = true
+            log_analytics_workspace_id = azurerm_log_analytics_workspace.log-aks-main.id
+        }
     }
 
     tags = {
