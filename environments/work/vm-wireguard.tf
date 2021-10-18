@@ -57,20 +57,20 @@ resource "azurerm_linux_virtual_machine" "vm-wireguard" {
     environment = "work"
     zone = "dmz"
     applicationRole = "wireguard"
-    wireguard_ip = "192.168.8.0/32"
+    wireguard_ip = "192.168.9.0/32"
   }
 }
 
-resource "azurerm_dev_test_global_vm_shutdown_schedule" "wireguard-vm-schedule" {
-  virtual_machine_id = azurerm_linux_virtual_machine.vm-wireguard.id
-  location           = azurerm_resource_group.tf-connectivity.location
-  enabled            = true
+# resource "azurerm_dev_test_global_vm_shutdown_schedule" "wireguard-vm-schedule" {
+#   virtual_machine_id = azurerm_linux_virtual_machine.vm-wireguard.id
+#   location           = azurerm_resource_group.tf-connectivity.location
+#   enabled            = true
 
-  daily_recurrence_time = "1900"
-  timezone              = "Central European Standard Time"
+#   daily_recurrence_time = "1900"
+#   timezone              = "Central European Standard Time"
 
-  notification_settings {
-    enabled         = false
-    time_in_minutes = "15"
-  }
-}
+#   notification_settings {
+#     enabled         = false
+#     time_in_minutes = "15"
+#   }
+# }

@@ -54,12 +54,29 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
 
     addon_profile {
-        # ingress_application_gateway {
-        #     enabled = true
-        # }
         oms_agent {
             enabled                    = true
             log_analytics_workspace_id = azurerm_log_analytics_workspace.log-aks-main.id
+        }
+
+        aci_connector_linux {
+            enabled = false
+        }
+
+        azure_policy {
+            enabled = false
+        }
+
+        http_application_routing {
+            enabled = false
+        }
+
+        ingress_application_gateway {
+            enabled                              = false
+        }
+
+        kube_dashboard {
+            enabled = false
         }
     }
 

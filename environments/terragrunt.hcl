@@ -9,7 +9,7 @@ remote_state {
 }
 
 inputs = {
-  location = "northeurope"
+  location = "westeurope"
   connectivity_resource_group_name = "tf-connectivity"
   storage_resource_group_name = "tf-storage"
   arc_resource_group_name = "tf-arc"
