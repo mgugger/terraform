@@ -50,7 +50,8 @@ resource "azurerm_linux_virtual_machine" "vm-k3s-server1" {
   tags = {
     environment = "work"
     zone = "internal"
-    applicationRole = "k3s"
+    applicationRole = "k3s-server"
+    wireguard_ip = "192.168.9.1/32"
   }
 }
 
@@ -112,7 +113,8 @@ resource "azurerm_linux_virtual_machine" "vm-k3s-worker1" {
   tags = {
     environment = "work"
     zone = "internal"
-    applicationRole = "k3s"
+    applicationRole = "k3s-agent"
+    wireguard_ip = "192.168.9.2/32"
   }
 }
 

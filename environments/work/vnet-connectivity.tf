@@ -40,11 +40,15 @@ resource "azurerm_subnet" "aks" {
   address_prefixes = ["10.0.235.64/27"]
 }
 
+resource "azurerm_subnet" "postgresql" {
+  name                 = "postgresql"
+  enforce_private_link_endpoint_network_policies = true
+  virtual_network_name = azurerm_virtual_network.sandbox.name
+  resource_group_name  = azurerm_resource_group.tf-connectivity.name
+  address_prefixes = ["10.0.235.96/27"]
+}
+
 ## Free Ranges in 10.0.235.0/24
-# "10.0.235.64/27"
-# "10.0.235.96/27"
 # "10.0.235.128/27"
 # "10.0.235.160/27"
 # "10.0.235.192/27"
-
-## AKS
