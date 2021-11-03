@@ -35,7 +35,7 @@ resource "azurerm_virtual_machine" "vm-server1" {
   name                  = "vm-server1"
   location              = var.location
   resource_group_name   = azurerm_resource_group.tf-vms.name
-  vm_size               = "Standard_B1ms"
+  vm_size               = "Standard_B1s"
   network_interface_ids = [
     azurerm_network_interface.nic-server1.id,
   ]
@@ -49,6 +49,7 @@ resource "azurerm_virtual_machine" "vm-server1" {
 
   tags = {
     environment = "home"
+    applicationRole = "devops"
     wireguard_ip = "192.168.8.5/32"
   }
 }

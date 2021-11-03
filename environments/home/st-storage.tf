@@ -45,3 +45,10 @@ resource "azurerm_storage_container" "Pictures" {
   storage_account_name  = azurerm_storage_account.restic-backup.name
   container_access_type = "private"
 }
+
+resource "azurerm_storage_container" "Documents" {
+  depends_on = [azurerm_role_assignment.restic-backup-data-contributor-role]
+  name                  = "documents"
+  storage_account_name  = azurerm_storage_account.restic-backup.name
+  container_access_type = "private"
+}
