@@ -22,30 +22,51 @@ resource "azurerm_subnet" "dmz" {
   name                 = "dmz"
   virtual_network_name = azurerm_virtual_network.sandbox.name
   resource_group_name  = azurerm_resource_group.tf-connectivity.name
-  address_prefixes = ["10.0.235.0/27"]
+  address_prefixes     = ["10.0.235.0/27"]
+  service_endpoints                              = [
+   "Microsoft.Storage"
+  ]
 }
 
 resource "azurerm_subnet" "internal" {
   name                 = "internal"
   virtual_network_name = azurerm_virtual_network.sandbox.name
   resource_group_name  = azurerm_resource_group.tf-connectivity.name
-  address_prefixes = ["10.0.235.32/27"]
+  enforce_private_link_endpoint_network_policies = true
+  address_prefixes     = ["10.0.235.32/27"]
+  service_endpoints                              = [
+   "Microsoft.Sql",
+   "Microsoft.Storage"
+  ]
 }
 
 resource "azurerm_subnet" "aks" {
-  name                 = "aks"
+  name                                           = "aks"
   enforce_private_link_endpoint_network_policies = true
-  virtual_network_name = azurerm_virtual_network.sandbox.name
-  resource_group_name  = azurerm_resource_group.tf-connectivity.name
-  address_prefixes = ["10.0.235.64/27"]
+  virtual_network_name                           = azurerm_virtual_network.sandbox.name
+  resource_group_name                            = azurerm_resource_group.tf-connectivity.name
+  address_prefixes                               = ["10.0.235.64/27"]
+  service_endpoints                              = [
+   "Microsoft.Storage"
+  ]
 }
 
 resource "azurerm_subnet" "postgresql" {
-  name                 = "postgresql"
+  name                                           = "postgresql"
   enforce_private_link_endpoint_network_policies = true
-  virtual_network_name = azurerm_virtual_network.sandbox.name
-  resource_group_name  = azurerm_resource_group.tf-connectivity.name
-  address_prefixes = ["10.0.235.96/27"]
+  virtual_network_name                           = azurerm_virtual_network.sandbox.name
+  resource_group_name                            = azurerm_resource_group.tf-connectivity.name
+  address_prefixes                               = ["10.0.235.96/27"]
+  service_endpoints                              = [ "Microsoft.Storage"]
+  delegation {
+    name = "dlg-Microsoft.DBforPostgreSQL-flexibleServers"
+    service_delegation {
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+      ]
+      name = "Microsoft.DBforPostgreSQL/flexibleServers"
+    }
+  }
 }
 
 ## Free Ranges in 10.0.235.0/24

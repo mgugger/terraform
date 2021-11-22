@@ -61,6 +61,20 @@ resource "azurerm_linux_virtual_machine" "vm-wireguard" {
   }
 }
 
+resource "azurerm_virtual_machine_extension" "vmwireguardflowlogs" {
+  name                 = "hostname"
+  virtual_machine_id   = azurerm_linux_virtual_machine.vm-wireguard.id
+  publisher            = "Microsoft.Azure.NetworkWatcher"
+  type                 = "NetworkWatcherAgentLinux"
+  settings                   = jsonencode({})
+  type_handler_version = "1.4"
+  auto_upgrade_minor_version = true
+
+  tags = {
+    environment = "work"
+  }
+}
+
 # resource "azurerm_dev_test_global_vm_shutdown_schedule" "wireguard-vm-schedule" {
 #   virtual_machine_id = azurerm_linux_virtual_machine.vm-wireguard.id
 #   location           = azurerm_resource_group.tf-connectivity.location

@@ -6,6 +6,11 @@ resource "azurerm_resource_group" "tf-aks" {
   }
 }
 
+data "azurerm_user_assigned_identity" "aks-main" {
+  name                = "${azurerm_kubernetes_cluster.aks.name}-agentpool"
+  resource_group_name = azurerm_kubernetes_cluster.aks.node_resource_group
+}
+
 resource "azurerm_log_analytics_workspace" "log-aks-main" {
   name                = "log-aks-main"
   location            = var.location
