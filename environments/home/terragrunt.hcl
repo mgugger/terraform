@@ -10,6 +10,7 @@ remote_state {
 
 inputs = {
   location = "switzerlandnorth"
+  tenant_id = "a5f516d3-a4e5-414a-8463-9e78921e4769"
   connectivity_resource_group_name = "tf-connectivity"
   storage_resource_group_name = "tf-storage"
   vms_resource_group_name = "tf-vms"

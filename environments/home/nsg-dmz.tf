@@ -42,6 +42,18 @@ locals {
       destination_address_prefix = "VirtualNetwork"
     }
 
+    dns = {
+      name                       = "coredns-udp"
+      priority                   = 1010
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Udp"
+      source_port_range          = "*"
+      destination_port_range    = "53"
+      source_address_prefix      = "*"
+      destination_address_prefix = "VirtualNetwork"
+    }
+
     allow_vnet_inbound = {
       name                       = "allow_vnet_inbound"
       priority                   = 3500

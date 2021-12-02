@@ -18,6 +18,10 @@ variable vm_snapshot_resource_id {
     description = "Resource Group Name"
 }
 
+variable tenant_id {
+    description = "Azure Tenant Id"
+}
+
 variable "storage_resource_group_name" {
    description = "Resource Group Name"
 }
