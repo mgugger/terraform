@@ -54,6 +54,30 @@ locals {
       destination_address_prefix = "VirtualNetwork"
     }
 
+    http = {
+      name                       = "http-tcp"
+      priority                   = 1020
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range    = "80"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+
+    https = {
+      name                       = "https-tcp"
+      priority                   = 1030
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range    = "443"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+
     allow_vnet_inbound = {
       name                       = "allow_vnet_inbound"
       priority                   = 3500
