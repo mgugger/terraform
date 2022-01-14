@@ -16,40 +16,40 @@ resource "azurerm_network_interface" "nic-server1" {
   }
 }
 
-resource "azurerm_managed_disk" "server1-osdisk" {
-  name = "vm-server1-osdisk"
-  os_type              = "Linux"
-  location = var.location
-  resource_group_name = azurerm_resource_group.tf-vms.name
-  storage_account_type = "Premium_LRS"
-  create_option = "Copy"
-  source_resource_id = var.vm_snapshot_resource_id
-  disk_size_gb = "16"
+# resource "azurerm_managed_disk" "server1-osdisk" {
+#   name = "vm-server1-osdisk"
+#   os_type              = "Linux"
+#   location = var.location
+#   resource_group_name = azurerm_resource_group.tf-vms.name
+#   storage_account_type = "Premium_LRS"
+#   create_option = "Copy"
+#   source_resource_id = var.vm_snapshot_resource_id
+#   disk_size_gb = "16"
 
-  tags = {
-    environment = "home"
-  }
-}
+#   tags = {
+#     environment = "home"
+#   }
+# }
 
-resource "azurerm_virtual_machine" "vm-server1" {
-  name                  = "vm-server1"
-  location              = var.location
-  resource_group_name   = azurerm_resource_group.tf-vms.name
-  vm_size               = "Standard_B1s"
-  network_interface_ids = [
-    azurerm_network_interface.nic-server1.id,
-  ]
+# resource "azurerm_virtual_machine" "vm-server1" {
+#   name                  = "vm-server1"
+#   location              = var.location
+#   resource_group_name   = azurerm_resource_group.tf-vms.name
+#   vm_size               = "Standard_B1s"
+#   network_interface_ids = [
+#     azurerm_network_interface.nic-server1.id,
+#   ]
 
-  storage_os_disk {
-    name              = "vm-server1-osdisk"
-    os_type = "linux"
-    managed_disk_id   = "${resource.azurerm_managed_disk.server1-osdisk.id}"
-    create_option     = "Attach"
-  }
+#   storage_os_disk {
+#     name              = "vm-server1-osdisk"
+#     os_type = "linux"
+#     managed_disk_id   = "${resource.azurerm_managed_disk.server1-osdisk.id}"
+#     create_option     = "Attach"
+#   }
 
-  tags = {
-    environment = "home"
-    applicationRole = "devops"
-    wireguard_ip = "192.168.8.5/32"
-  }
-}
+#   tags = {
+#     environment = "home"
+#     applicationRole = "devops"
+#     wireguard_ip = "192.168.8.5/32"
+#   }
+# }

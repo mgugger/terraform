@@ -31,8 +31,9 @@ resource "azurerm_managed_disk" "wireguard-osdisk" {
   location = var.location
   resource_group_name = azurerm_resource_group.tf-connectivity.name
   storage_account_type = "Premium_LRS"
-  create_option = "Copy"
-  source_resource_id = var.vm_snapshot_resource_id
+  create_option = "Import"
+  storage_account_id = azurerm_storage_account.vm-images.id
+  source_uri = "https://mdgvmimages.blob.core.windows.net/archlinux/archlinux.vhd"
   disk_size_gb = "4"
 
   tags = {
@@ -41,7 +42,7 @@ resource "azurerm_managed_disk" "wireguard-osdisk" {
   }
 }
 
-## Wireguard VM
+# Wireguard VM
 resource "azurerm_virtual_machine" "vm-wireguard" {
   name                  = "vm-wireguard"
   location              = var.location
